@@ -60,6 +60,9 @@ function render() {
   }, idx.price);
   candles.setData(d.bars);
   series.price = candles;
+  // Default price-scale margins are top 20% / bottom 10%, i.e. 30% of the pane
+  // is blank. Tighten so the candles actually fill it.
+  candles.priceScale().applyOptions({ scaleMargins: { top: 0.06, bottom: 0.06 } });
 
   if (show.gate && d.high_p95.length) {
     series.gate = chart.addSeries(LWC.LineSeries, {
@@ -76,6 +79,7 @@ function render() {
       lastValueVisible: false,
     }, idx.vol);
     series.vol.setData(d.volume);
+    series.vol.priceScale().applyOptions({ scaleMargins: { top: 0.15, bottom: 0 } });
   }
 
   if (show.macd) {
@@ -125,9 +129,9 @@ function render() {
     series.regime.setData(d.regime);
   }
 
-  // price pane keeps the room; study panes stay short
+  // price pane keeps most of the room; study panes stay short
   try {
-    const weights = { price: 6, vol: 1.1, macd: 1.8, rsi: 1.6, regime: 1 };
+    const weights = { price: 10, vol: 0.9, macd: 1.5, rsi: 1.3, regime: 0.7 };
     chart.panes().forEach((p, i) => {
       const key = Object.keys(idx).find((k) => idx[k] === i);
       p.setStretchFactor(weights[key] ?? 1);

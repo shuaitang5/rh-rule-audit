@@ -6,7 +6,7 @@
   --dim: #787b86; --green: #26a69a; --red: #ef5350; --orange: #ff9800;
   --blue: #2962ff;
   --pad: max(8px, env(safe-area-inset-left));
-  --chart-h: 58vh;
+  --chart-h: 66vh;
 }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html { -webkit-text-size-adjust: 100%; }
@@ -85,6 +85,8 @@ body.full section, body.full footer { display: none; }
 }
 .legend span { display: inline-flex; align-items: center; gap: 4px; }
 .sw { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+.sw.dash { width: 12px; height: 0; border: 0; border-top: 1px dashed #2962ff;
+           background: none !important; border-radius: 0; }
 .dim { color: var(--dim); font-weight: 400; }
 
 .err {
