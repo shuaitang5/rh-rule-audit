@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- viewport-fit=cover so the safe-area insets below actually apply on iPhone -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#131722">
+<title>rule audit</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <select id="ticker" aria-label="ticker"></select>
+    <div class="readout" id="readout"></div>
+    <button id="full" class="btn" title="expand chart">⤢</button>
+  </div>
+
+  <div class="strip" id="metrics"></div>
+
+  <div class="bar chips">
+    <button class="chip on" data-pane="vol">Vol</button>
+    <button class="chip on" data-pane="macd">MACD</button>
+    <button class="chip on" data-pane="rsi">RSI</button>
+    <button class="chip on" data-pane="regime">Trend</button>
+    <button class="chip on" data-pane="gate">p95</button>
+    <button class="chip on" data-pane="blocked">Blocked</button>
+  </div>
+</header>
+
+<div id="err" class="err" hidden></div>
+
+<div id="chartwrap">
+  <div id="chart"></div>
+  <div class="nav">
+    <button id="prev" class="btn round" title="previous event">↑</button>
+    <button id="next" class="btn round" title="next event">↓</button>
+  </div>
+</div>
+
+<div class="legend">
+  <span><i class="sw" style="background:#26a69a"></i>buy</span>
+  <span><i class="sw" style="background:#ef5350"></i>sell</span>
+  <span><i class="sw" style="background:#ff9800"></i>trim</span>
+  <span><i class="sw" style="background:#787b86"></i>refused</span>
+  <span class="dim">trend 3=UP 2=RANGE 1=DOWN · dashed = structure only</span>
+</div>
+
+<section>
+  <h2>Events <span class="dim" id="evcount"></span></h2>
+  <div id="events" class="cards"></div>
+</section>
+
+<section>
+  <h2>Trades <span class="dim">one row = one round trip</span></h2>
+  <div id="trades" class="cards"></div>
+</section>
+
+<footer class="dim" id="foot"></footer>
+
+<script src="lightweight-charts.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
